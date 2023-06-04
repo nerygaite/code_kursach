@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Browse entries</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eedfdf;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            color: #333;
+            font-size: 24px;
+            margin-top: 0;
+        }
+        
+        form {
+            margin-top: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        
+        p.success {
+            color: green;
+        }
+        
+        a {
+            color: blue;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Моє оголошення</h1>
+        {% if step=="compose_entry" %}
+            <form action="{{ url_for('write') }}" method="post">
+                <label for="title">Назва:</label>
+                <input type="text" id="title" name="title">
+                
+                <label for="content">Опис:</label>
+                <textarea id="content" name="content" rows="5"></textarea>
+                
+                <br>
+                <input type="hidden" name="step" value="add_entry">
+                <input type="submit" value="Відправити">
+            </form>
+        {% elif step == "add_entry" %}
+            <p class="success">Твоє оголошення було відправлене. Перевір сторінку оголошень.</p>
+            <p>
+                <a href="{{ url_for('homepage') }}">Повернутись на головну</a>
+            </p>
+        {% endif %}
+    </div>
+</body>
+</html>

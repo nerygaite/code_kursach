@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blog</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eedfdf;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            color: #333;
+            font-size: 24px;
+            margin-top: 0;
+        }
+        
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        li {
+            margin-bottom: 10px;
+        }
+        
+        a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #878787;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        
+        a:hover {
+            background-color: #979797;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Нерухомість</h1>
+        <ul>
+            <li><a href="{{ url_for('browse') }}">Подивитись оголошення</a></li>
+            <li><a href="{{ url_for('write') }}">Написати своє</a></li>
+        </ul>
+    </div>
+</body>
+</html>

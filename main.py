@@ -6,9 +6,7 @@ from flask.cli import with_appcontext
 import click
 
 app = Flask(__name__)
-
 ####################################################
-
 @app.route("/")
 def homepage():
     return render_template("home.html")
@@ -34,6 +32,21 @@ def browse():
     rowlist = cursor.fetchall()
     return render_template('browse.html', entries=rowlist)
 
+@app.route("/write", methods=['get', 'post'])
+def write():
+    # Step 1, display form
+    if "step" not in request.form:     
+        return render_template('write.html', step="compose_entry")
+    
+    # Step 2, add blog post to database.
+    elif request.form["step"] == "add_entry":
+        conn = get_db()
+        cursor = conn.cursor()
+        cursor.execute("insert into entries (title, content) values (%s, %s)",
+                   [request.form['title'], request.form['content']])
+        conn.commit()
+        return render_template("write.html", step="add_entry")
+    
 #####################################################
   
 def connect_db():
@@ -74,3 +87,5 @@ def debug(s):
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8080, debug=True)
+
+    
